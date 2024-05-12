@@ -1,0 +1,52 @@
+models:
+  - name: clusters
+    description: Dimensional model representing the latest state of compute clusters
+
+    columns:
+      - name: account_id
+        description: ID of the account where this cluster was created.
+      - name: workspace_id
+        description: ID of the workspace where this cluster was created.
+      - name: cluster_id
+        description: ID of the cluster for which this record is associated.
+        tests:
+          - not_null
+          - unique
+      - name: cluster_name
+        description: User defined name for the cluster.
+      - name: owned_by
+        description: Username of the cluster owner. Defaults to the cluster creator, but can be changed through the Clusters API.
+      - name: create_time
+        description: Timestamp of the change to this compute definition.
+      - name: delete_time
+        description: Timestamp of when the cluster was deleted. The value is null if the cluster is not deleted.
+      - name: driver_node_type
+        description: Driver node type name. This matches the instance type name from the cloud provider.
+      - name: worker_node_type
+        description: Worker node type name. This matches the instance type name from the cloud provider.
+      - name: worker_count
+        description: Number of workers. Defined for fixed-size clusters only.
+      - name: min_autoscale_workers
+        description: The set minimum number of workers. This field is valid only for autoscaling clusters.
+      - name: max_autoscale_workers
+        description: The set maximum number of workers. This field is valid only for autoscaling clusters.
+      - name: auto_termination_minutes
+        description: The configured autotermination duration.
+      - name: enable_elastic_disk
+        description: Autoscaling disk enablement status.
+      - name: cluster_source
+        description: Indicates the creator for the cluster - UI, API, DLT, JOB, etc.
+      - name: driver_instance_pool_id
+        description: Instance pool ID if the driver is configured on top of an instance pool.
+      - name: worker_instance_pool_id
+        description: Instance Pool ID if the worker is configured on top of an instance pool.
+      - name: dbr_version
+        description: The Databricks Runtime of the cluster.
+      - name: change_time
+        description: Timestamp of change to the compute definition.
+        tests:
+          - not_null
+      - name: change_date
+        description: Change date. Used for retention.
+      - name: tags
+        description: User-defined tags for the cluster (does not include default tags).

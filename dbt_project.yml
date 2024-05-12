@@ -1,0 +1,17 @@
+
+name: 'dbt_databricks_monitoring'
+version: '1.0.0'
+config-version: 2
+
+profile: 'dbt_databricks_monitoring'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  databricks_monitoring:
+    +on_schema_change: "append_new_columns"

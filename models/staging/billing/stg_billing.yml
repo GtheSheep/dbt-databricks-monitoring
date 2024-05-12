@@ -1,0 +1,173 @@
+models:
+  - name: stg_billing__list_prices
+    description: Staging model for Databricks system prices table
+
+    columns:
+      - name: account_id
+        description: ID of the account this report was generated for
+      - name: price_start_time
+        description: The time this price became effective
+        tests:
+          - not_null
+      - name: price_end_time
+        description: The time this price stopped being effective
+      - name: sku_name
+        description: Name of the SKU
+      - name: cloud
+        description: Name of the Cloud this price is applicable to. Possible values are AWS, AZURE, and GCP.
+        tests:
+          - accepted_values:
+              values:
+                - AWS
+                - AZURE
+                - GCP
+      - name: currency_code
+        description: The currency this price is expressed in
+      - name: usage_unit
+        description: The unit of measurement that is monetized.
+      - name: default_price
+        description: Default price for this resource
+      - name: list_price_id
+        description: Unique identifier key for this price entry
+        tests:
+          - not_null
+          - unique
+
+
+  - name: stg_billing__usage
+    description: Staging model for Databricks system usage table
+
+    columns:
+      - name: record_id
+        description: Unique ID for this record
+        tests:
+          - not_null
+          - unique
+      - name: record_type
+        description: Whether the record is a correction. Possible values are ORIGINAL, RETRACTION, and RESTATEMENT.
+        tests:
+          - accepted_values:
+              values:
+                - ORIGINAL
+                - RETRACTION
+                - RESTATEMENT
+      - name: account_id
+        description: ID of the account this report was generated for
+      - name: workspace_id
+        description: ID of the Workspace this usage was associated with
+      - name: billing_origin_product
+        description: The product that originated the usage. Some products can be billed as different SKUs.
+        tests:
+          - accepted_values:
+              values:
+                - JOBS
+                - DLT
+                - SQL
+                - ALL_PURPOSE
+                - MODEL_SERVING
+                - INTERACTIVE
+                - MANAGED_STORAGE
+                - VECTOR_SEARCH
+                - LAKEHOUSE_MONITORING
+                - PREDICTIVE_OPTIMIZATION
+                - ONLINE_TABLES
+      - name: sku_name
+        description: Name of the SKU
+      - name: cloud
+        description: Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP.
+        tests:
+          - accepted_values:
+              values:
+                - AWS
+                - AZURE
+                - GCP
+      - name: usage_type
+        description: The type of usage attributed to the product or workload for billing purposes. Possible values are COMPUTE_TIME, COMPUTE_SLOT, STORAGE_SPACE, NETWORK_BYTES, API_CALLS, TOKEN, or GPU_TIME.
+        tests:
+          - accepted_values:
+              values:
+                - COMPUTE_TIME
+                - COMPUTE_SLOT
+                - STORAGE_SPACE
+                - NETWORK_BYTES
+                - API_CALLS
+                - TOKEN
+                - GPU_TIME
+      - name: usage_start_time
+        description: The start time relevant to this usage record
+      - name: usage_end_time
+        description: The end time relevant to this usage record
+      - name: usage_date
+        description: Date of the usage record, this field can be used for faster aggregation by date
+        tests:
+          - not_null
+      - name: usage_unit
+        description: Unit this usage is measured in. Possible values include DBUs.
+      - name: usage_quantity
+        description: Number of units consumed for this record.
+      - name: ingestion_date
+        description: Date the record was ingested into the usage table.
+        tests:
+          - not_null
+      - name: run_as
+        description: >
+          Serverless Compute for Workflows - The user or service principal defined in the run as setting. By default, jobs run as the identity of the job owner, but admins can change this to be another user or service principal.
+          Serverless Compute for Notebooks - The user who ran the notebook commands (specifically, the user who created the notebook session). For shared notebooks, this includes usage by other users sharing the same notebook session.
+          [Source docs](https://docs.databricks.com/en/admin/system-tables/billing.html#analyze-identity-metadata)
+      - name: warehouse_id
+        description: ID of the warehouse associated with the usage record
+      - name: cluster_id
+        description: ID of the cluster associated with the usage record
+      - name: instance_pool_id
+        description: ID of the instance pool associated with the usage record
+      - name: node_type
+        description: The instance type of the compute resource
+      - name: job_id
+        description: ID of the job associated with the usage record
+      - name: job_run_id
+        description: ID of the job run associated with the usage record
+      - name: notebook_id
+        description: ID of the notebook associated with the usage record
+      - name: dlt_pipeline_id
+        description: ID of the Delta Live Tables pipeline associated with the usage record
+      - name: is_serverless
+        description: Whether or not the compute was serverless
+      - name: is_photon
+        description: Whether or not the compute was using photon
+      - name: serving_type
+        description: Type of serving used
+        tests:
+          - accepted_values:
+              values:
+                - MODEL
+                - GPU_MODEL
+                - FOUNDATION_MODEL
+                - FEATURE
+                - null
+      - name: dlt_tier
+        description: DLT tier used
+        tests:
+          - accepted_values:
+              values:
+                - CORE
+                - PRO
+                - ADVANCED
+                - null
+      - name: jobs_tier
+        description: Job tier used
+        tests:
+          - accepted_values:
+              values:
+                - LIGHT
+                - CLASSIC
+                - null
+      - name: sql_tier
+        description: SQL tier used
+        tests:
+          - accepted_values:
+              values:
+                - CLASSIC
+                - PRO
+                - null
+      - name: custom_tags
+        description: Tags applied by the users to this usage
