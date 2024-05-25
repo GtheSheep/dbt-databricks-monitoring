@@ -1,0 +1,25 @@
+models:
+  - name: warehouse_status
+    description: >
+      This model tracks warehouse usage time at varying cluster sizes, each time the warehouse changes cluster size, a new entry is generated.
+      Can be used to calculate SQL warehouse usage.
+    
+    columns:
+      - name: account_id
+        description: The ID of the Databricks account.
+        tests:
+          - not_null
+      - name: workspace_id
+        description: The ID of the workspace where the warehouse is deployed.
+        tests:
+          - not_null
+      - name: warehouse_id
+        description: The ID of SQL warehouse the event is related to.
+        tests:
+          - not_null
+      - name: cluster_count
+        description: The number of clusters that are actively running.
+      - name: valid_from
+        description: Timestamp from which this warehouse event is valid
+      - name: valid_to
+        description: Timestamp to which this warehouse event is valid, i.e. when the warehouse scales, stops, or resumes next

@@ -3,8 +3,8 @@
     materialized='incremental',
     unique_key='cluster_id'
   )
-}},
-final as (
+}}
+with final as (
   select
     *
   from

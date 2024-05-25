@@ -5,8 +5,12 @@ models:
     columns:
       - name: account_id
         description: ID of the account where this cluster was created.
+        tests:
+          - not_null
       - name: workspace_id
         description: ID of the workspace where this cluster was created.
+        tests:
+          - not_null
       - name: cluster_id
         description: ID of the cluster for which this record is associated.
         tests:
@@ -49,3 +53,38 @@ models:
         description: Change date. Used for retention.
       - name: tags
         description: User-defined tags for the cluster (does not include default tags).
+
+
+  - name: stg_compute__warehouse_events
+    description: Staging model for Databricks system warehouse events table
+
+    columns:
+      - name: event_time
+        description: Timestamp of when the event took place.
+        tests:
+          - not_null
+      - name: account_id
+        description: The ID of the Databricks account.
+        tests:
+          - not_null
+      - name: workspace_id
+        description: The ID of the workspace where the warehouse is deployed.
+        tests:
+          - not_null
+      - name: warehouse_id
+        description: The ID of SQL warehouse the event is related to.
+        tests:
+          - not_null
+      - name: event_type
+        description: The type of warehouse event.
+        tests:
+          - accepted_values:
+              values:
+                - SCALED_UP
+                - SCALED_DOWN
+                - STOPPING
+                - RUNNING
+                - STARTING
+                - STOPPED
+      - name: cluster_count
+        description: The number of clusters that are actively running.

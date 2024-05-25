@@ -3,8 +3,8 @@
     materialized='incremental',
     unique_key='record_id'
   )
-}},
-usage as (
+}}
+with usage as (
   select
     *
   from
