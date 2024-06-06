@@ -22,7 +22,7 @@ list_prices as (
 ),
 final as (
   select
-    usage.*
+    usage.*,
     list_prices.default_price,
     list_prices.list_price_id,
     usage.usage_quantity * list_prices.default_price as spend

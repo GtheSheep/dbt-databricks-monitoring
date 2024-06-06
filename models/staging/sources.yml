@@ -2,6 +2,7 @@ sources:
   - name: databricks_billing
     database: system
     schema: billing
+    description: See source [docs](https://docs.databricks.com/en/admin/system-tables/billing.html)
     tables:
       - name: list_prices
         description: See source [docs](https://docs.databricks.com/en/admin/system-tables/pricing.html)
@@ -11,6 +12,7 @@ sources:
   - name: databricks_compute
     database: system
     schema: compute
+    description: See source [docs](https://docs.databricks.com/en/admin/system-tables/compute.html)
     tables:
       - name: clusters
         description: See source [docs](https://docs.databricks.com/en/admin/system-tables/compute.html#cluster-table-schema)
