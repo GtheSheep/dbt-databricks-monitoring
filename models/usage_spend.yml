@@ -36,6 +36,7 @@ models:
                 - LAKEHOUSE_MONITORING
                 - PREDICTIVE_OPTIMIZATION
                 - ONLINE_TABLES
+                - SHARED_SERVERLESS_COMPUTE
       - name: sku_name
         description: Name of the SKU
       - name: cloud
