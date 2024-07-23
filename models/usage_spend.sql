@@ -31,6 +31,7 @@ final as (
   inner join
     list_prices
     on usage.sku_name = list_prices.sku_name
+      and usage.usage_unit = list_prices.usage_unit
       and usage.usage_end_time >= list_prices.price_start_time
       and (list_prices.price_end_time is null or usage.usage_end_time < list_prices.price_end_time)
 )
