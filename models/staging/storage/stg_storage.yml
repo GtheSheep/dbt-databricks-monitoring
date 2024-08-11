@@ -1,0 +1,90 @@
+models:
+  - name: stg_storage__predictive_optimization_operations_history
+    description: Staging model for Databricks storage predictive optimization operations history table.
+
+    columns:
+      - name: account_id
+        description: ID of the account
+      - name: workspace_id
+        description: The ID of the workspace in which predictive optimization ran the operation.
+      - name: start_time
+        description: The time at which the operation started. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+        tests:
+          - not_null
+      - name: end_time
+        description: The time at which the operation ended. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+      - name: metastore_name
+        description: The name of the metastore to which the optimized table belongs.
+      - name: metastore_id
+        description: The ID of the metastore to which the optimized table belongs.
+      - name: catalog_name
+        description: The name of the catalog to which the optimized table belongs.
+      - name: schema_name
+        description: The name of the schema to which the optimized table belongs.
+      - name: table_name
+        description: The name of the optimized table.
+      - name: table_id
+        description: The ID of the optimized table.
+      - name: operation_type
+        description: The optimization operation which was performed.
+        tests:
+          - accepted_values:
+              values:
+                - COMPACTION
+                - VACUUM
+      - name: operation_id
+        description: The ID for the optimization operation.
+        tests:
+          - not_null
+          - unique
+      - name: operation_status
+        description: The status of the optimization operation.
+        tests:
+          - accepted_values:
+              values:
+                - SUCCESSFUL
+                - "FAILED: INTERNAL_ERROR"
+      - name: number_of_compacted_files
+        description: Number of compacted files.
+        tests:
+          - not_null:
+              config:
+                where: "operation_type = 'COMPACTION'"
+      - name: amount_of_data_compacted_bytes
+        description: Amount of data compacted, in bytes.
+        tests:
+          - not_null:
+              config:
+                where: "operation_type = 'COMPACTION'"
+      - name: number_of_output_files
+        description: Number of output files
+        tests:
+          - not_null:
+              config:
+                where: "operation_type = 'COMPACTION'"
+      - name: amount_of_output_data_bytes
+        description: Amount of data output, in bytes.
+        tests:
+          - not_null:
+              config:
+                where: "operation_type = 'COMPACTION'"
+      - name: number_of_deleted_files
+        description: Number of files deleted
+        tests:
+          - not_null:
+              config:
+                where: "operation_type = 'VACUUM'"
+      - name: amount_of_data_deleted_bytes
+        description: Amount of data deleted, in bytes.
+        tests:
+          - not_null:
+              config:
+                where: "operation_type = 'VACUUM'"
+      - name: usage_unit
+        description: The unit of usage that this operation incurred.
+        tests:
+          - accepted_values:
+              values:
+                - ESTIMATED_DBU
+      - name: usage_quantity
+        description: The amount of the usage unit that was used by this operation.

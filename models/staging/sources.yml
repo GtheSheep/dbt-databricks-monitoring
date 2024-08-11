@@ -18,3 +18,11 @@ sources:
         description: See source [docs](https://docs.databricks.com/en/admin/system-tables/compute.html#cluster-table-schema)
       - name: warehouse_events
         description: See source [docs](https://docs.databricks.com/en/admin/system-tables/warehouse-events.html#warehouse-events-schema)
+
+  - name: databricks_storage
+    database: system
+    schema: storage
+    description: See source [docs](https://docs.databricks.com/en/admin/system-tables/index.html)
+    tables:
+      - name: predictive_optimization_operations_history
+        description: See source [docs](https://docs.databricks.com/en/admin/system-tables/predictive-optimization.html#predictive-optimization-table-schema)
