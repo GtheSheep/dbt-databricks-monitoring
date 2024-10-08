@@ -1,0 +1,96 @@
+models:
+  - name: stg_query__history
+    description: Staging model for Databricks query history table
+
+    columns:
+      - name: account_id
+        description: ID of the account.
+        tests:
+          - not_null
+      - name: workspace_id
+        description: The ID of the workspace where the query was run.
+        tests:
+          - not_null
+      - name: statement_id
+        description: The ID that uniquely identifies the execution of the statement. You can use this ID to find the statement execution in the Query History UI.
+        tests:
+          - not_null
+      - name: session_id
+        description: The Spark session ID.
+      - name: execution_status
+        description: The statement termination state.
+        tests:
+          - accepted_values:
+              values:
+                - FINISHED
+                - FAILED
+                - CANCELED
+      - name: compute
+        description: A struct that represents the type of compute resource used to run the statement and the ID of the resource where applicable.
+        tests:
+          - accepted_values:
+              values:
+                - WAREHOUSE
+                - SERVERLESS_COMPUTE
+      - name: executed_by_user_id
+        description: The ID of the user who ran the statement.
+      - name: executed_by
+        description: The email address or username of the user who ran the statement.
+      - name: statement_text
+        description: Text of the SQL statement. If you have configured customer-managed keys, statement_text is empty.
+      - name: statement_type
+        description: The statement type. For example - ALTER, COPY, and INSERT.
+      - name: error_message
+        description: Message describing the error condition. If you have configured customer-managed keys, error_message is empty.
+      - name: client_application
+        description: Client application that ran the statement. For example: Databricks SQL, Tableau, and Power BI.
+      - name: client_driver
+        description: The connector used to connect to Databricks to run the statement. For example: Databricks SQL Driver for Go, Databricks ODBC Driver, Databricks JDBC Driver.
+      - name: total_duration_ms
+        description: Total execution time of the statement in milliseconds ( excluding result fetch time ).
+      - name: waiting_for_compute_duration_ms
+        description: Time spent waiting for compute resources to be provisioned in milliseconds.
+      - name: waiting_at_capacity_duration_ms
+        description: Time spent waiting in queue for available compute capacity in milliseconds.
+      - name: execution_duration_ms
+        description: Time spent executing the statement in milliseconds.
+      - name: compilation_duration_ms
+        description: Time spent loading metadata and optimizing the statement in milliseconds.
+      - name: total_task_duration_ms
+        description: The sum of all task durations in milliseconds. This time represents the combined time it took to run the query across all cores of all nodes. It can be significantly longer than the wall-clock duration if multiple tasks are executed in parallel. It can be shorter than the wall-clock duration if tasks wait for available nodes.
+      - name: result_fetch_duration_ms
+        description: Time spent, in milliseconds, fetching the statement results after the execution finished.
+      - name: start_time
+        description: The time when Databricks received the request. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+      - name: end_time
+        description: The time the statement execution ended, excluding result fetch time. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+      - name: update_time
+        description: The time the statement last received a progress update. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+      - name: read_partitions
+        description: The number of partitions read after pruning.
+      - name: pruned_files
+        description: The number of pruned files.
+      - name: read_files
+        description: The number of files read after pruning.
+      - name: read_rows
+        description: Total number of rows read by the statement.
+      - name: produced_rows
+        description: Total number of rows returned by the statement.
+      - name: read_bytes
+        description: Total size of data read by the statement in bytes.
+      - name: read_io_cache_percent
+        description: The percentage of bytes of persistent data read from the IO cache.
+      - name: from_results_cache
+        description: TRUE indicates that the statement result was fetched from the cache.
+      - name: spilled_local_bytes
+        description: Size of data, in bytes, temporarily written to disk while executing the statement.
+      - name: written_bytes
+        description: The size in bytes of persistent data written to cloud object storage.
+      - name: shuffle_read_bytes
+        description: The total amount of data in bytes sent over the network.
+      - name: query_source
+        description: A struct that contains key-value pairs representing one or more Databricks entities that were involved in the execution of this statement, such as jobs, notebooks, or dashboards. This field only records Databricks entities.
+      - name: executed_as
+        description: The name of the user or service principal whose privilege was used to run the statement.
+      - name: executed_as_user_id
+        description: The ID of the user or service principal whose privilege was used to run the statement.
