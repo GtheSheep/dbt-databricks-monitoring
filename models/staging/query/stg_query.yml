@@ -43,9 +43,9 @@ models:
       - name: error_message
         description: Message describing the error condition. If you have configured customer-managed keys, error_message is empty.
       - name: client_application
-        description: Client application that ran the statement. For example: Databricks SQL, Tableau, and Power BI.
+        description: Client application that ran the statement. For example - Databricks SQL, Tableau, and Power BI.
       - name: client_driver
-        description: The connector used to connect to Databricks to run the statement. For example: Databricks SQL Driver for Go, Databricks ODBC Driver, Databricks JDBC Driver.
+        description: The connector used to connect to Databricks to run the statement. For example - Databricks SQL Driver for Go, Databricks ODBC Driver, Databricks JDBC Driver.
       - name: total_duration_ms
         description: Total execution time of the statement in milliseconds ( excluding result fetch time ).
       - name: waiting_for_compute_duration_ms
@@ -61,11 +61,11 @@ models:
       - name: result_fetch_duration_ms
         description: Time spent, in milliseconds, fetching the statement results after the execution finished.
       - name: start_time
-        description: The time when Databricks received the request. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+        description: The time when Databricks received the request. Timezone information is recorded at the end of the value with '+00:00' representing UTC.
       - name: end_time
-        description: The time the statement execution ended, excluding result fetch time. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+        description: The time the statement execution ended, excluding result fetch time. Timezone information is recorded at the end of the value with '+00:00' representing UTC.
       - name: update_time
-        description: The time the statement last received a progress update. Timezone information is recorded at the end of the value with +00:00 representing UTC.
+        description: The time the statement last received a progress update. Timezone information is recorded at the end of the value with '+00:00' representing UTC.
       - name: read_partitions
         description: The number of partitions read after pruning.
       - name: pruned_files
