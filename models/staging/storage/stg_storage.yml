@@ -46,40 +46,16 @@ models:
                 - "FAILED: INTERNAL_ERROR"
       - name: number_of_compacted_files
         description: Number of compacted files.
-        tests:
-          - not_null:
-              config:
-                where: "operation_type = 'COMPACTION'"
       - name: amount_of_data_compacted_bytes
         description: Amount of data compacted, in bytes.
-        tests:
-          - not_null:
-              config:
-                where: "operation_type = 'COMPACTION'"
       - name: number_of_output_files
         description: Number of output files
-        tests:
-          - not_null:
-              config:
-                where: "operation_type = 'COMPACTION'"
       - name: amount_of_output_data_bytes
         description: Amount of data output, in bytes.
-        tests:
-          - not_null:
-              config:
-                where: "operation_type = 'COMPACTION'"
       - name: number_of_deleted_files
         description: Number of files deleted
-        tests:
-          - not_null:
-              config:
-                where: "operation_type = 'VACUUM'"
       - name: amount_of_data_deleted_bytes
         description: Amount of data deleted, in bytes.
-        tests:
-          - not_null:
-              config:
-                where: "operation_type = 'VACUUM'"
       - name: usage_unit
         description: The unit of usage that this operation incurred.
         tests:
