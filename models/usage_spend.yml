@@ -144,11 +144,19 @@ models:
         description: Default price for this resource
         tests:
           - not_null
+      - name: promotional_price
+        description: Promotional price for this resource
+        tests:
+          - not_null
+      - name: effective_price
+        description: Effective price for this resource
+        tests:
+          - not_null
       - name: list_price_id
         description: Unique identifier key for this price entry
         tests:
           - not_null
       - name: spend
-        description: Monetary cost of this entry based on default price
+        description: Monetary cost of this entry based on effective price
         tests:
           - not_null

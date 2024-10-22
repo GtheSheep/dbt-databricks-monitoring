@@ -27,6 +27,10 @@ models:
         description: The unit of measurement that is monetized.
       - name: default_price
         description: Default price for this resource
+      - name: promotional_price
+        description: Promotional price for this resource
+      - name: effective_price
+        description: Effective price for this resource
       - name: list_price_id
         description: Unique identifier key for this price entry
         tests:

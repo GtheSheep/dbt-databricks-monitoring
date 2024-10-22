@@ -24,8 +24,10 @@ final as (
   select
     usage.*,
     list_prices.default_price,
+    list_prices.promotional_price,
+    list_prices.effective_price,
     list_prices.list_price_id,
-    usage.usage_quantity * list_prices.default_price as spend
+    usage.usage_quantity * list_prices.effective_price as spend
   from
     usage
   inner join

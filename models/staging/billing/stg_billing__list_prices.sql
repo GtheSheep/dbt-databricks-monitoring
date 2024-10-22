@@ -13,6 +13,8 @@ select
   currency_code,
   usage_unit,
   pricing.default as default_price,
+  pricing.promotional.default as promotional_price,
+  pricing.effective_list.default as effective_price,
   {{ dbt_utils.generate_surrogate_key(['account_id', 'price_start_time', 'price_end_time', 'sku_name', 'cloud', 'currency_code', 'usage_unit']) }} as list_price_id
 from
   {{ source('databricks_billing', 'list_prices') }}
