@@ -15,6 +15,7 @@ models:
         description: The ID that uniquely identifies the execution of the statement. You can use this ID to find the statement execution in the Query History UI.
         tests:
           - not_null
+          - unique
       - name: session_id
         description: The Spark session ID.
       - name: execution_status

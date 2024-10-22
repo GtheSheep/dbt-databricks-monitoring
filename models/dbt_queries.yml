@@ -1,0 +1,36 @@
+models:
+  - name: dbt_queries
+    description: Summary details of dbt queries in SQL warehouses
+
+    columns:
+      - name: statement_text
+        description: Query text
+      - name: start_time
+        description: Query start time
+      - name: end_time
+        description: Query end time
+      - name: update_time
+        description: Query last update time
+      - name: total_duration_ms
+        description: Total query duration in milliseconds
+        tests:
+          - not_null
+      - name: warehouse_id
+        description: Warehouse ID the SQL query was executed on
+        tests:
+          - not_null
+      - name: dbt_version
+        description: Package version of dbt-core used
+      - name: dbt_databricks_version
+        description: Package version of dbt-databricks used
+      - name: target_name
+        description: dbt target name
+      - name: node_id
+        description: dbt node ID
+      - name: statement_id
+        description: Query statement ID
+        tests:
+          - not_null
+          - unique
+      - name: query_spend
+        description: Estimated spend for the query
