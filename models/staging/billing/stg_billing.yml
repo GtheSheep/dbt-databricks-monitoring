@@ -73,6 +73,7 @@ models:
                 - ONLINE_TABLES
                 - SHARED_SERVERLESS_COMPUTE
                 - FINE_GRAINED_ACCESS_CONTROL
+                - NETWORKING
       - name: sku_name
         description: Name of the SKU
       - name: cloud
@@ -95,6 +96,7 @@ models:
                 - API_CALLS
                 - TOKEN
                 - GPU_TIME
+                - NETWORK_BYTE
       - name: usage_start_time
         description: The start time relevant to this usage record
       - name: usage_end_time
