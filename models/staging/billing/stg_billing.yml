@@ -78,6 +78,7 @@ models:
                 - SHARED_SERVERLESS_COMPUTE
                 - FINE_GRAINED_ACCESS_CONTROL
                 - NETWORKING
+                - APPS
       - name: sku_name
         description: Name of the SKU
       - name: cloud
