@@ -81,7 +81,7 @@ models:
         description: Total size of data read by the statement in bytes.
       - name: read_io_cache_percent
         description: The percentage of bytes of persistent data read from the IO cache.
-      - name: from_results_cache
+      - name: from_result_cache
         description: TRUE indicates that the statement result was fetched from the cache.
       - name: spilled_local_bytes
         description: Size of data, in bytes, temporarily written to disk while executing the statement.

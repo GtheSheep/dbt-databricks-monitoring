@@ -34,7 +34,7 @@ select
     produced_rows,
     read_bytes,
     read_io_cache_percent,
-    from_results_cache,
+    from_result_cache,
     spilled_local_bytes,
     written_bytes,
     shuffle_read_bytes,
