@@ -12,7 +12,7 @@ with dbt_queries as (
     end_time,
     update_time,
     compute_warehouse_id AS warehouse_id,
-    btrim(regexp_extract(statement_text, '\/\*(.*?)\*\/'), '*') AS dbt_metadata -- could be better
+    try_parse_json(btrim(regexp_extract(statement_text, '\/\*(.*?)\*\/'), '*')) AS dbt_metadata -- could be better
   from
     {{ ref('stg_query__history') }}
   where
@@ -29,10 +29,10 @@ final as (
     dbt_queries.update_time,
     dbt_queries.total_duration_ms,
     dbt_queries.warehouse_id,
-    dbt_queries.dbt_metadata.dbt_version as dbt_version,
-    dbt_queries.dbt_metadata.dbt_databricks_version as dbt_databricks_version,
-    dbt_queries.dbt_metadata.target_name as target_name,
-    dbt_queries.dbt_metadata.node_id as node_id,
+    dbt_queries.dbt_metadata:dbt_version::string as dbt_version,
+    dbt_queries.dbt_metadata:dbt_databricks_version::string as dbt_databricks_version,
+    dbt_queries.dbt_metadata:target_name::string as target_name,
+    dbt_queries.dbt_metadata:node_id::string as node_id,
     usage_spend.statement_id,
     usage_spend.spend * dbt_queries.total_duration_ms / 3600000 as query_spend
   from
