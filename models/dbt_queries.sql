@@ -11,7 +11,7 @@ with dbt_queries as (
     start_time,
     end_time,
     update_time,
-    compute.warehouse_id AS warehouse_id,
+    compute_warehouse_id AS warehouse_id,
     btrim(regexp_extract(statement_text, '\/\*(.*?)\*\/'), '*') AS dbt_metadata -- could be better
   from
     {{ ref('stg_query__history') }}

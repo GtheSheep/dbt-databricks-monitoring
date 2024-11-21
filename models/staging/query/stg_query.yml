@@ -26,13 +26,17 @@ models:
                 - FINISHED
                 - FAILED
                 - CANCELED
-      - name: compute
-        description: A struct that represents the type of compute resource used to run the statement and the ID of the resource where applicable.
+      - name: compute_type
+        description: Type of compute resource used to run the statement.
         tests:
           - accepted_values:
               values:
                 - 'WAREHOUSE'
                 - 'SERVERLESS_COMPUTE'
+      - name: compute_cluster_id
+        description: Cluster ID used to run the statement.
+      - name: compute_warehouse_id
+        description: Warehouse ID used to run the statement.
       - name: executed_by_user_id
         description: The ID of the user who ran the statement.
       - name: executed_by
