@@ -31,8 +31,8 @@ models:
         tests:
           - accepted_values:
               values:
-                - WAREHOUSE
-                - SERVERLESS_COMPUTE
+                - 'WAREHOUSE'
+                - 'SERVERLESS_COMPUTE'
       - name: executed_by_user_id
         description: The ID of the user who ran the statement.
       - name: executed_by
